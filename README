@@ -8,18 +8,6 @@ The dataset contains 1,200 orders across 1,189 unique customers and 7 products. 
 
 **Key insight:** the store's repeat purchase rate is very low (under 1% of customers placed more than one order, contributing only ~1.5% of revenue). That single number is the biggest growth lever in the dataset — most of the analysis and recommendations below trace back to it.
 
-## What's in this repo
-
-| File | Description |
-|---|---|
-| `analysis.py` | Full analysis pipeline: cleaning → feature engineering → RFM → cohorts → forecasting → charts → dashboard |
-| `Online-Store-Orders.csv` | Raw source data |
-| `cleaned_orders.csv` | Cleaned dataset after deduplication, type fixes, and feature engineering |
-| `rfm_segments.csv` | Per-customer Recency/Frequency/Monetary scores and segment labels |
-| `cohort_retention.csv` | Month-by-month cohort retention percentages |
-| `report.txt` | Full text report: KPIs, customer analysis, outliers, RFM summary, forecast, methodology, and recommendations |
-| `dashboard.html` | Interactive Plotly dashboard (open directly in any browser) |
-| `chart1.png` – `chart19.png` | 19 static charts covering distributions, trends, segments, outliers, and profitability |
 
 ## Tools & Libraries
 
