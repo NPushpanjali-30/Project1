@@ -1,0 +1,70 @@
+# Online Store — Data Analysis Project
+
+End-to-end data analysis project built during my internship, covering data cleaning, exploratory analysis, customer segmentation (RFM), cohort retention, revenue forecasting, and an interactive dashboard — all built in Python from a raw e-commerce orders dataset.
+
+## Project Overview
+
+The dataset contains 1,200 orders across 1,189 unique customers and 7 products. The goal was to clean the raw data, extract business-relevant metrics, and surface actionable insights for a hypothetical online store — going beyond basic summary stats into segmentation, retention, and trend forecasting.
+
+**Key insight:** the store's repeat purchase rate is very low (under 1% of customers placed more than one order, contributing only ~1.5% of revenue). That single number is the biggest growth lever in the dataset — most of the analysis and recommendations below trace back to it.
+
+## What's in this repo
+
+| File | Description |
+|---|---|
+| `analysis.py` | Full analysis pipeline: cleaning → feature engineering → RFM → cohorts → forecasting → charts → dashboard |
+| `Online-Store-Orders.csv` | Raw source data |
+| `cleaned_orders.csv` | Cleaned dataset after deduplication, type fixes, and feature engineering |
+| `rfm_segments.csv` | Per-customer Recency/Frequency/Monetary scores and segment labels |
+| `cohort_retention.csv` | Month-by-month cohort retention percentages |
+| `report.txt` | Full text report: KPIs, customer analysis, outliers, RFM summary, forecast, methodology, and recommendations |
+| `dashboard.html` | Interactive Plotly dashboard (open directly in any browser) |
+| `chart1.png` – `chart19.png` | 19 static charts covering distributions, trends, segments, outliers, and profitability |
+
+## Tools & Libraries
+
+Python, pandas, NumPy, Matplotlib, Seaborn, SciPy (`stats.linregress`, `zscore`), Plotly (`graph_objects`, `subplots`).
+
+## Methodology
+
+- **Data cleaning:** missing coupon codes filled, dates parsed, duplicates and duplicate order IDs checked, text columns standardized, price mismatches flagged.
+- **Outlier detection:** IQR method (1.5× IQR) as the primary flag, cross-checked against a Z-score method (|z| > 3) since the two can disagree on skewed distributions.
+- **RFM segmentation:** customers scored on Recency, Frequency, and Monetary value using quartile-based binning (`pd.qcut`), then mapped into 8 named segments (Champion, Loyal, At Risk, Lost, etc.).
+- **Cohort analysis:** customers grouped by first-purchase month, tracking retention percentage in each subsequent month.
+- **Forecasting:** simple linear regression on monthly revenue. The model's R² is low (~0.09), meaning the trend line explains only a small share of month-to-month variation — the 3-month forecast is reported with that caveat rather than presented as a reliable prediction. This was an intentional choice: a forecast number without an honesty check on fit quality is more misleading than useful.
+- **Product profitability:** estimated using assumed margin percentages (not actual cost data), clearly labeled as estimates in the report.
+
+## Key Results
+
+- **Total Revenue:** ₹1,264,761.96 across 1,200 orders
+- **Average Order Value:** ₹1,053.97 (median ₹823.62)
+- **Top Product:** Chair (highest revenue contributor)
+- **Top 20% of customers** drive **45.3%** of total revenue
+- **Repeat customers:** 11 out of 1,189 (0.9%), contributing only 1.5% of revenue
+- **Best sales day:** Sunday
+- **8 IQR outlier orders** flagged for manual review
+
+## Sample Visuals
+
+![Revenue by Product](chart2_revenue_by_product.png)
+![RFM Segments](chart14_rfm_segments.png)
+![Cohort Retention](chart15_cohort_retention.png)
+
+## Business Recommendations
+
+1. Double down on **Chair**, the top revenue product.
+2. Scale the highest-performing referral channel.
+3. Schedule promotions around **Sunday**, the strongest sales day.
+4. Run win-back campaigns targeting the **At Risk** and **Lost** RFM segments.
+5. Manually review the 8 flagged outlier orders for fraud or data entry errors.
+6. Build a loyalty program — the top 20% of customers already drive 45% of revenue, and there's clear room to convert more one-time buyers into repeat customers.
+7. Treat the low repeat-purchase rate as the top priority: at under 1%, this is the single biggest opportunity area in the dataset.
+
+## How to Run
+
+```bash
+pip install pandas numpy matplotlib seaborn scipy plotly
+python analysis.py
+```
+
+This regenerates `cleaned_orders.csv`, `rfm_segments.csv`, `cohort_retention.csv`, `report.txt`, `dashboard.html`, and all 19 charts.

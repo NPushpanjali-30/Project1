@@ -1,0 +1,111 @@
+ONLINE STORE — FULL DATA ANALYSIS REPORT
+============================================================
+
+PROJECT SUMMARY
+----------------------------------------
+Total Orders         : 1200
+Unique Customers     : 1189
+Unique Products      : 7
+Total Revenue        : Rs.1,264,761.96
+Average Order Value  : Rs.1,053.97
+Median Order Value   : Rs.823.62
+Highest Order Value  : Rs.3,456.40
+Lowest Order Value   : Rs.11.39
+
+KEY INSIGHTS
+----------------------------------------
+'Chair' is the leading revenue driver, 'Instagram' is the top
+acquisition channel, and the top 20% of customers generate 45% of total
+revenue — concentration that justifies a loyalty/retention push. Repeat purchase
+rate is very low (0.9% of customers, 1.5% of revenue), which is the
+single biggest growth lever available: most customers buy once and do not return.
+Sunday is the strongest day for revenue, useful for timing promotions.
+
+CUSTOMER ANALYSIS
+----------------------------------------
+Repeat Customers     : 11 (0.9%)
+New Customers        : 1178 (99.1%)
+Repeat Revenue %     : 1.5%
+New Revenue %        : 98.5%
+Top 20% Contrib      : 45.3% of total revenue
+
+OUTLIER DETECTION
+----------------------------------------
+IQR Range            : Rs.0.00 - Rs.3,330.41
+  Note: raw lower IQR bound was Rs.-1,341.41 (negative); clipped at 0
+  since order values cannot be negative. Used for display only — the outlier
+  flag below still uses the raw statistical bound.
+IQR Outliers         : 8
+Z-Score Outliers     : 0
+
+RFM SEGMENTS
+----------------------------------------
+                    Customers  Avg_Revenue
+Segment                                   
+Loyal                     219   873.248082
+At Risk                   209  1171.791675
+Lost Champion             161  1212.691118
+New Customer              149   904.543826
+Potential Loyalist        147  1053.461837
+Lost                      136   985.495956
+Needs Attention            87   906.134943
+Champion                   81  1615.750494
+
+FORECASTING
+----------------------------------------
+Trend Slope          : Rs.-349.15/month
+R-squared            : 0.088
+  CAVEAT: R-squared is low, meaning the linear trend explains only a small
+  share of month-to-month variation. Treat the forecast below as a rough,
+  low-confidence estimate, not a reliable prediction. Consider it more useful
+  for spotting the slope's direction (down) than for the exact rupee figures.
+Forecast Month +1    : Rs.36,746.89
+Forecast Month +2    : Rs.36,397.74
+Forecast Month +3    : Rs.36,048.59
+
+METHODOLOGY & ASSUMPTIONS
+----------------------------------------
+- Repeat customer = placed more than 1 order in the dataset's full date range
+  (no rolling time window applied).
+- Outliers = IQR method (1.5x IQR) on TotalPrice; Z-score method (>3 sigma) shown
+  alongside for comparison, since the two methods can disagree on skewed data.
+- RFM scores use quartile-based binning (qcut) on Recency, Frequency, Monetary,
+  so thresholds are dataset-relative, not fixed business rules.
+- Forecast uses simple linear regression on monthly revenue totals; no
+  seasonality component, so caution applies on a low R-squared (see above).
+- Profit margins per product are assumed estimates (not actual cost data) and
+  should be replaced with real margin figures if available.
+
+BUSINESS RECOMMENDATIONS
+----------------------------------------
+1. Focus on 'Chair' — highest revenue product
+2. Scale 'Instagram' referral channel
+3. Best sales day is Sunday — schedule promotions
+4. Retarget At-Risk and Lost RFM segments
+5. Review 8 outlier orders
+6. Reward top 20% customers — they drive 45% revenue
+7. Investigate why repeat purchase rate is only 0.9% —
+   this is the largest single opportunity area in the dataset
+
+CHARTS GENERATED
+----------------------------------------
+  chart1_order_status.png
+  chart2_revenue_by_product.png
+  chart3_payment_methods.png
+  chart4_orders_by_month.png
+  chart5_order_value_category.png
+  chart6_top_customers.png
+  chart7_coupon_revenue.png
+  chart8_referral_revenue.png
+  chart9_monthly_revenue.png
+  chart10_status_revenue.png
+  chart11_correlation_heatmap.png
+  chart12_day_of_week.png
+  chart13_outlier_detection.png
+  chart14_rfm_segments.png
+  chart15_cohort_retention.png
+  chart16_repeat_vs_new.png
+  chart17_coupon_effectiveness.png
+  chart18_forecast.png
+  chart19_product_profitability.png
+  dashboard.html (Interactive)
